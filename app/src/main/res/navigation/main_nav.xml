@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/words">
+
+    <fragment
+        android:id="@+id/words"
+        android:name="com.example.teste.presentation.words.WordFragment"
+        android:label="@string/fragment_word"
+        tools:layout="@layout/fragment_word" />
+
+    <fragment
+        android:id="@+id/favorites"
+        android:name="com.example.teste.presentation.favorites.FavoriteFragment"
+        android:label="@string/fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
+
+    <fragment
+        android:id="@+id/history"
+        android:name="com.example.teste.presentation.history.HistoryFragment"
+        android:label="@string/fragment_history"
+        tools:layout="@layout/fragment_history" />
+
+    <fragment
+        android:id="@+id/wordDetails"
+        android:name="com.example.teste.presentation.WordDetailsFragment"
+        android:label="@string/fragment_details"
+        tools:layout="@layout/fragment_word_details">
+        <argument
+            android:name="keyBundle"
+            app:argType="com.example.teste.main.data.response.ListDataWords" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/error"
+        android:name="com.example.teste.presentation.ErrorFragment"
+        android:label="@string/fragment_error"
+        tools:layout="@layout/fragment_error">
+
+    </fragment>
+
+
+</navigation>

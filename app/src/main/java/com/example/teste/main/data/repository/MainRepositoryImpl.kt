@@ -50,4 +50,7 @@ class MainRepositoryImpl(
     override suspend fun updateRepositories(repositories: Repositories) {
         repositoriesDao.updateRepositories(repositories)
     }
+    override suspend fun searchWords(search: String): ResultWrapper<List<Repositories>> {
+        return call { repositoriesDao.searchWord(search) }
+    }
 }

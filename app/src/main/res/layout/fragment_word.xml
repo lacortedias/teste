@@ -12,23 +12,51 @@
         android:layout_margin="16dp"
         tools:context=".presentation.words.WordFragment">
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputWordSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/wordSearch"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/design_default_color_background"
+                android:hint="Pesquisar"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text=""
+                android:textSize="14sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
         <TextView
             android:id="@+id/txtReturn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:textAlignment="center"
-            android:textSize="20sp"
             android:textColor="@color/black"
+            android:textSize="20sp"
+            android:singleLine="true"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputWordSearch"
             tools:text="TextView" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewReturn"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

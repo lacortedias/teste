@@ -7,6 +7,7 @@ import com.example.teste.framework.data.Repositories
 import com.example.teste.framework.data.model.RepositoriesAction
 import com.example.teste.framework.enum.Action
 import com.example.teste.framework.network.ResultWrapper
+import com.example.teste.framework.util.FileUtil
 import com.example.teste.main.data.repository.MainRepository
 import com.example.teste.main.data.response.DataWords
 import com.example.teste.main.data.response.ListDataWords
@@ -68,14 +69,35 @@ class MainViewModel(private val repository: MainRepository) : ViewModel() {
 
     fun getRepositories() = viewModelScope.launch {
         viewState.value = MainViewState.Loading(true)
-        when (val repository = repository.getRepositories()) {
+
+        when (val result = repository.getRepositories()) {
             is ResultWrapper.Success -> {
-                repository.value.let {
+                result.value.let {
                     listRepositories.value = it
                 }
             }
             is ResultWrapper.Error -> {
-                viewState.value = MainViewState.Error(repository.message)
+                viewState.value = MainViewState.Error(result.message)
+            }
+        }
+        viewState.value = MainViewState.Loading(false)
+    }
+
+    fun searchWords(search: String) = viewModelScope.launch {
+        viewState.value = MainViewState.Loading(true)
+
+        if (search.isBlank()) {
+            getRepositories()
+        } else {
+            when (val result = repository.searchWords(search)) {
+                is ResultWrapper.Success -> {
+                    listRepositories.value = result.value.filter {
+                        it.word.startsWith(search, true)
+                    }
+                }
+                is ResultWrapper.Error -> {
+                    viewState.value = MainViewState.Error(result.message)
+                }
             }
         }
         viewState.value = MainViewState.Loading(false)

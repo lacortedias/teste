@@ -1,5 +1,6 @@
 package com.example.teste.framework.data
 
+import android.icu.text.StringSearch
 import androidx.room.*
 
 @Dao
@@ -19,6 +20,9 @@ interface RepositoriesDao {
 
     @Query("SELECT * FROM word_table")
     suspend fun getRepositories(): List<Repositories>
+
+    @Query("SELECT * FROM word_table WHERE word LIKE '%' || :search || '%'")
+    suspend fun searchWord(search: String): List<Repositories>
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateRepositories(repositories: Repositories)

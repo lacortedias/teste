@@ -12,4 +12,5 @@ interface MainRepository {
     suspend fun getFavoritesWords(): List<Repositories>
     suspend fun getHistoryWords(): List<Repositories>
     suspend fun updateRepositories(repositories: Repositories)
+    suspend fun searchWords(search: String): ResultWrapper<List<Repositories>>
 }

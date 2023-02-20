@@ -4,22 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.teste.R
 import com.example.teste.databinding.FragmentWordBinding
-import com.example.teste.main.data.response.ListDataWords
 import com.example.teste.framework.data.Repositories
 import com.example.teste.framework.util.FileUtil
 import com.example.teste.main.adapter.MainAdapter
 import com.example.teste.main.viewmodel.MainViewModel
 import com.example.teste.main.viewstate.MainViewState
 import com.example.teste.presentation.MainActivity
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class WordFragment : Fragment() {
@@ -49,6 +46,7 @@ class WordFragment : Fragment() {
         viewModel.getRepositories()
 
         setupObserver()
+        setupSearch()
     }
 
     private fun setupAdapter(word: List<Repositories>) {
@@ -99,9 +97,17 @@ class WordFragment : Fragment() {
         }
     }
 
+    private fun setupSearch() {
+        binding.wordSearch.addTextChangedListener {
+                viewModel.searchWords(it.toString())
+            }
+    }
+
     override fun onStop() {
         super.onStop()
         viewModel.listCallApi = MutableLiveData()
+        binding.wordSearch.setText("")
+
     }
 
     private fun showLoading(show: Boolean) {

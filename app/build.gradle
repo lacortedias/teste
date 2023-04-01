@@ -47,6 +47,7 @@ android {
     dataBinding {
         enabled true
     }
+    namespace 'com.example.teste'
 }
 
 ext {
@@ -106,5 +107,6 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2'
 
     implementation 'io.insert-koin:koin-android:3.3.0'
+    implementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
 
 }
